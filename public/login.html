@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15211d">
+  <title>Entrar · Oficina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="login-page">
+  <main class="login-layout">
+    <section class="login-art">
+      <a class="brand" href="/login"><span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4l-3 3-3-3 3-3Z"/><path d="m15 9 3-3 3 3-3 3"/></svg></span><span><strong>Oficina</strong><small>PAINEL DE GESTÃO</small></span></a>
+      <div class="login-art-copy"><span class="eyebrow"><span class="live-dot"></span> GESTÃO DA OFICINA</span><h1>Seu trabalho,<br>em ordem<span>.</span></h1><p>Peças, fornecedores e serviços organizados em um só lugar.</p></div>
+      <div class="login-art-footer">SISTEMA DE GESTÃO · OFICINA</div>
+    </section>
+    <section class="login-form-side">
+      <div class="login-box"><span class="eyebrow">BEM-VINDO DE VOLTA</span><h2>Acesse seu painel</h2><p>Entre com os dados de administrador da oficina.</p>
+        <form id="loginForm"><label class="login-field"><span>Usuário</span><input name="username" autocomplete="username" required placeholder="Seu usuário"></label><label class="login-field"><span>Senha</span><input name="password" type="password" autocomplete="current-password" required placeholder="Sua senha"></label><div class="login-error" id="loginError" role="alert"></div><button class="btn btn-primary login-submit" type="submit">Entrar no sistema <span>→</span></button></form>
+        <small class="login-footnote">Acesso restrito aos responsáveis pela oficina.</small>
+      </div>
+    </section>
+  </main>
+  <script src="/login.js" defer></script>
+</body>
+</html>

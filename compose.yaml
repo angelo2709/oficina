@@ -1,0 +1,41 @@
+services:
+  banco:
+    image: mysql:8.4
+    container_name: oficina-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root1234}
+      MYSQL_DATABASE: oficina
+      MYSQL_USER: ${MYSQL_USER:-oficina_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-oficina123}
+    ports:
+      - "3307:3306"
+    volumes:
+      - dados_oficina:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p\"$${MYSQL_ROOT_PASSWORD}\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  app:
+    build: .
+    container_name: oficina-web
+    restart: unless-stopped
+    environment:
+      APP_PORT: 3000
+      DB_HOST: banco
+      DB_PORT: 3306
+      MYSQL_DATABASE: oficina
+      MYSQL_USER: ${MYSQL_USER:-oficina_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-oficina123}
+      ADMIN_USER: ${ADMIN_USER:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      SESSION_SECRET: ${SESSION_SECRET:-}
+    ports:
+      - "3000:3000"
+    depends_on:
+      banco:
+        condition: service_healthy
+volumes:
+  dados_oficina:

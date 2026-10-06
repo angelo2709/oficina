@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15211d">
+  <title>Oficina — Gestão</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#inicio" aria-label="Oficina, início">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a5 5 0 0 0-6.4 6.4L3 18l3 3 5.3-5.3a5 5 0 0 0 6.4-6.4l-3 3-3-3 3-3Z"/><path d="m15 9 3-3 3 3-3 3"/></svg></span>
+        <span><strong>Oficina</strong><small>PAINEL DE GESTÃO</small></span>
+      </a>
+      <div class="side-label">MENU PRINCIPAL</div>
+      <nav class="nav-list" aria-label="Navegação principal">
+        <button class="nav-item active" data-view="inicio"><span class="nav-icon">⌂</span><span>Visão geral</span></button>
+        <button class="nav-item" data-view="estoque"><span class="nav-icon">▤</span><span>Estoque de peças</span><span class="nav-count" id="navStock">0</span></button>
+        <button class="nav-item" data-view="ordens"><span class="nav-icon">▣</span><span>Ordens de serviço</span></button>
+        <button class="nav-item" data-view="fornecedores"><span class="nav-icon">♧</span><span>Fornecedores</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-spark">✳</span><strong>Seu trabalho, em ordem.</strong><p>Gerencie peças e acompanhe cada serviço em um só lugar.</p></div>
+        <div class="profile"><span class="avatar">OF</span><span><strong>Oficina</strong><small>Administrador</small></span><button class="logout-button" id="logoutButton" type="button">Sair ↗</button></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+        <div class="breadcrumbs"><span>Oficina</span><b>/</b><strong id="crumb">Visão geral</strong></div>
+        <div class="top-actions"><span class="today" id="today"></span><span class="top-avatar">OF</span></div>
+      </header>
+      <div class="page-wrap">
+        <section class="view active" id="view-inicio">
+          <div class="welcome-row"><div><span class="eyebrow"><span class="live-dot"></span> PAINEL DA OFICINA</span><h1>Bom trabalho<span class="title-period">.</span></h1><p class="subtitle">Acompanhe o que está acontecendo na sua oficina.</p></div><button class="btn btn-primary" data-open="order"><span class="plus">＋</span> Nova ordem de serviço</button></div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span class="stat-icon green">▤</span><span class="stat-kicker">INVENTÁRIO</span></div><div class="stat-value" id="statParts">—</div><div class="stat-caption">peças cadastradas</div><div class="stat-foot"><span class="stat-note" id="statUnits">—</span><span>unidades em estoque</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span class="stat-icon amber">◷</span><span class="stat-kicker">EM SERVIÇO</span></div><div class="stat-value" id="statActive">—</div><div class="stat-caption">ordens em andamento</div><div class="stat-foot"><span class="stat-note" id="statOrders">—</span><span>ordens registradas</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span class="stat-icon coral">!</span><span class="stat-kicker">ATENÇÃO</span></div><div class="stat-value" id="statLow">—</div><div class="stat-caption">peças com estoque baixo</div><div class="stat-foot"><span class="stat-note warn-text">Acompanhe a reposição</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span class="stat-icon blue">✓</span><span class="stat-kicker">FINALIZADAS</span></div><div class="stat-value" id="statDone">—</div><div class="stat-caption">ordens concluídas</div><div class="stat-foot"><span class="stat-note">Neste banco de dados</span></div></article>
+          </div>
+          <div class="content-grid">
+            <section class="panel recent-panel"><div class="panel-head"><div><span class="eyebrow">ACOMPANHAMENTO</span><h2>Ordens recentes</h2></div><button class="text-button" data-go="ordens">Ver todas <span>↗</span></button></div><div id="recentOrders" class="recent-list"><div class="loading-line"></div></div></section>
+            <section class="panel stock-panel"><div class="panel-head"><div><span class="eyebrow">INVENTÁRIO</span><h2>Estoque baixo</h2></div><button class="small-icon-button" data-go="estoque" title="Ver estoque">↗</button></div><div id="lowStockList" class="low-stock-list"><div class="loading-line"></div></div><button class="panel-link" data-go="estoque">Abrir inventário completo <span>→</span></button></section>
+          </div>
+          <section class="bottom-banner"><div class="banner-icon">✳</div><div><strong>Um bom atendimento começa com organização.</strong><p>Cadastre serviços e mantenha o estoque atualizado para cuidar de cada cliente.</p></div><button class="btn btn-light" data-go="estoque">Ir para o estoque <span>→</span></button></section>
+        </section>
+
+        <section class="view" id="view-estoque">
+          <div class="page-heading"><div><span class="eyebrow">INVENTÁRIO</span><h1>Estoque de peças<span class="title-period">.</span></h1><p class="subtitle">Cadastre produtos e acompanhe as quantidades disponíveis.</p></div><button class="btn btn-primary" data-open="part"><span class="plus">＋</span> Cadastrar peça</button></div>
+          <section class="panel table-panel"><div class="table-toolbar"><div><h2>Peças cadastradas</h2><span class="muted" id="partsCount">Carregando...</span></div><label class="search-box"><span>⌕</span><input id="partSearch" type="search" placeholder="Buscar peça ou código..."></label></div><div class="table-scroll"><table><thead><tr><th>PEÇA</th><th>CATEGORIA</th><th>FABRICANTE</th><th>PREÇO DE VENDA</th><th>ESTOQUE</th><th></th></tr></thead><tbody id="partsTable"></tbody></table></div><div class="table-empty hidden" id="partsEmpty">Nenhuma peça encontrada.</div></section>
+        </section>
+
+        <section class="view" id="view-ordens">
+          <div class="page-heading"><div><span class="eyebrow">ATENDIMENTO</span><h1>Ordens de serviço<span class="title-period">.</span></h1><p class="subtitle">Registre os serviços e acompanhe o andamento de cada veículo.</p></div><button class="btn btn-primary" data-open="order"><span class="plus">＋</span> Nova ordem de serviço</button></div>
+          <div class="filter-row"><div class="filter-tabs"><button class="filter-tab active" data-status="">Todas</button><button class="filter-tab" data-status="Aberta">Abertas</button><button class="filter-tab" data-status="Em andamento">Em andamento</button><button class="filter-tab" data-status="Aguardando peças">Aguardando peças</button><button class="filter-tab" data-status="Concluída">Concluídas</button></div><span class="muted" id="ordersCount"></span></div>
+          <section class="orders-list" id="ordersList"></section>
+        </section>
+
+        <section class="view" id="view-fornecedores">
+          <div class="page-heading"><div><span class="eyebrow">PARCEIROS</span><h1>Fornecedores<span class="title-period">.</span></h1><p class="subtitle">Organize os contatos de quem fornece peças para sua oficina.</p></div><button class="btn btn-primary" data-open="supplier"><span class="plus">＋</span> Adicionar fornecedor</button></div>
+          <div class="supplier-grid" id="supplierGrid"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><span class="eyebrow" id="modalEyebrow">CADASTRO</span><h2 id="modalTitle"></h2></div><button class="modal-close" id="modalClose" aria-label="Fechar">×</button></div>
+      <form id="modalForm"><div class="modal-fields" id="modalFields"></div><div class="modal-actions"><button type="button" class="btn btn-outline" id="modalCancel">Cancelar</button><button type="submit" class="btn btn-primary" id="modalSubmit">Salvar cadastro</button></div></form>
+    </section>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
